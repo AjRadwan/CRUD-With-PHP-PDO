@@ -1,4 +1,15 @@
-<?php include "inc/header.php"; ?>
+<?php include "inc/header.php";?>
+
+<?php
+ spl_autoload_register(function($class){
+  include "classes/" .$class. ".php";
+});
+?>
+<?php
+$user = new Student();
+?>
+
+
 <section class="mainleft">
 <form action="" method="post">
  <table>
@@ -38,18 +49,22 @@
         <th>Age</th>
         <th>Action</th>
     </tr>
-
+<?php 
+  $i = 0;
+ foreach ($user->readAll() as $key => $value) {
+    $i++;
+?>
     <tr>
-        <td>01</td>
-        <td>Ariful Islam</td>
-        <td>CSE</td>
-        <td>19</td>
+        <td><?php echo $i; ?></td>
+        <td><?php echo $value['name'] ?></td>
+        <td><?php echo $value['dep'] ?></td>
+        <td><?php echo $value['age'] ?></td>
         <td>
         <a href="">Edit</a> ||
         <a href="">Delete</a>
         </td>
     </tr>
-
+<?php }?>
     <tr>
         <td>01</td>
         <td>Delowar Jahan</td>
@@ -73,14 +88,5 @@
     </tr>
   </table>
 </section>
-
-
-
-
-
-
-
-
-
 
 <?php include "inc/footer.php"; ?>
