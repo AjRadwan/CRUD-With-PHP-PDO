@@ -10,6 +10,7 @@ spl_autoload_register(function($class){
 //create object from student class
 $user = new Student();
 
+//inserting data
 if (isset($_POST['submit']) == "POST") {
   $name = $_POST['name'];
   $dep = $_POST['dep'];
@@ -23,6 +24,23 @@ if (isset($_POST['submit']) == "POST") {
      echo "<strong class='insert'>Data Inserted Successfully!!</strong>";
     }
 }
+
+
+//Edit Data
+if (isset($_POST['edit']) == "POST") {
+  $id = $_POST['id'];
+  $name = $_POST['name'];
+  $dep = $_POST['dep'];
+  $age = $_POST['age'];
+
+  $user->setName($name);
+  $user->setDep($dep);
+  $user->setAge($age);
+
+  if ($user->update($id)) {
+     echo "<strong class='insert'>Data Updated Successfully!!</strong>";
+    }
+}
 ?>
 
 <?php
@@ -32,6 +50,7 @@ if ($_GET['action'] && $_GET['action'] == 'edit') {
    $result = $user->readById($id);
 ?>
 <form action="" method="post">
+<input type="hidden" name="id" value="<?php echo $result['id']; ?>"/>
  <table>
     <tr>
         <td>Name: </td>
