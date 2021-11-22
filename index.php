@@ -23,8 +23,42 @@ if (isset($_POST['submit']) == "POST") {
      echo "<strong class='insert'>Data Inserted Successfully!!</strong>";
     }
 }
-
 ?>
+
+<?php
+//upadte data query
+if ($_GET['action'] && $_GET['action'] == 'edit') {
+   $id = (int)$_GET['id'];
+   $result = $user->readById($id);
+?>
+<form action="" method="post">
+ <table>
+    <tr>
+        <td>Name: </td>
+        <td><input type="text" name="name" value="<?php echo $result['name']; ?>"/></td>    
+    </tr>
+
+    <tr>
+       <td>Department: </td>
+        <td><input type="text" name="dep" value="<?php echo $result['dep']; ?>"/></td>
+    </tr>
+
+    <tr>
+      <td>Age: </td>
+        <td><input type="text" name="age" value="<?php echo $result['age']; ?>"/></td>
+    </tr>
+    <tr>
+      <td></td>
+        <td>
+        <input type="submit" name="update" value="Submit"/>
+        <input type="reset" value="Clear"/>
+        </td>
+    </tr>
+  </table>
+</form>
+
+<?php } else { ?>
+
 <form action="" method="post">
  <table>
     <tr>
@@ -50,6 +84,7 @@ if (isset($_POST['submit']) == "POST") {
     </tr>
   </table>
 </form>
+<?php }  ?>
 </section>
 
 <section class="mainright">
@@ -72,7 +107,8 @@ if (isset($_POST['submit']) == "POST") {
         <td><?php echo $value['dep'] ?></td>
         <td><?php echo $value['age'] ?></td>
         <td>
-        <a href="">Edit</a> ||
+    <?php echo "<a href='index.php?action=edit&id=".$value['id']."'>Edit</a>";?>
+        ||
         <a href="">Delete</a>
         </td>
     </tr>

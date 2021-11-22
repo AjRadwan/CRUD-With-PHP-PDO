@@ -30,6 +30,14 @@ class Student{
         return $stmt->execute();
     }
 
+    public function readById($id){
+        $sql = "SELECT * FROM $this->table WHERE id = :id";
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(); //fetching only id
+     }
+
     public function readAll(){
       $sql = "SELECT * FROM $this->table";
       $stmt = DB::prepare($sql); 
