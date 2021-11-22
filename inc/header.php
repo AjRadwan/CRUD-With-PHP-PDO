@@ -4,6 +4,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Object-Oriented PHP for Beginners</title>
 <style>
+*{
+background-color: ;
+  }
 body {font-family: arial;font-size: 15px;line-height: 18px;margin: 0 auto;width: 850px;}
 a{color:#3399FF;}
 .headeroption {background: #3399ff url("img/php.png") no-repeat scroll 56px 18px;height: 80px;overflow: hidden;padding-left: 160px;}
