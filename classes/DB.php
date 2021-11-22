@@ -13,7 +13,7 @@ class DB {
        }
        return self::$pdo;
      }
-     public static  function prepare($sql){
+     public static function prepare($sql){
         return self::connetion()->prepare($sql);
      }
   }

@@ -1,16 +1,30 @@
-<?php include "inc/header.php";?>
+<?php include "inc/header.php"; 
 
-<?php
- spl_autoload_register(function($class){
+spl_autoload_register(function($class){
   include "classes/" .$class. ".php";
 });
 ?>
-<?php
-$user = new Student();
-?>
-
 
 <section class="mainleft">
+<?php
+//create object from student class
+$user = new Student();
+
+if (isset($_POST['submit']) == "POST") {
+  $name = $_POST['name'];
+  $dep = $_POST['dep'];
+  $age = $_POST['age'];
+
+  $user->setName($name);
+  $user->setDep($dep);
+  $user->setAge($age);
+
+  if ($user->insert()) {
+     echo "<strong class='insert'>Data Inserted Successfully!!</strong>";
+    }
+}
+
+?>
 <form action="" method="post">
  <table>
     <tr>
@@ -20,12 +34,12 @@ $user = new Student();
 
     <tr>
        <td>Department: </td>
-        <td><input type="text" name="name" required="1"/></td>
+        <td><input type="text" name="dep" required="1"/></td>
     </tr>
 
     <tr>
       <td>Age: </td>
-        <td><input type="text" name="name" required="1"/></td>
+        <td><input type="text" name="age" required="1"/></td>
     </tr>
     <tr>
       <td></td>
@@ -38,8 +52,6 @@ $user = new Student();
 </form>
 </section>
 
-
-
 <section class="mainright">
   <table class="tblone">
     <tr>
@@ -50,7 +62,7 @@ $user = new Student();
         <th>Action</th>
     </tr>
 <?php 
-  $i = 0;
+   $i = 0;
  foreach ($user->readAll() as $key => $value) {
     $i++;
 ?>
@@ -65,27 +77,7 @@ $user = new Student();
         </td>
     </tr>
 <?php }?>
-    <tr>
-        <td>01</td>
-        <td>Delowar Jahan</td>
-        <td>Physics</td>
-        <td>25</td>
-        <td>
-        <a href="">Edit</a> ||
-        <a href="">Delete</a>
-        </td>
-    </tr>
-
-    <tr>
-        <td>01</td>
-        <td>Kamrul Hasan</td>
-        <td>Physics</td>
-        <td>25</td>
-        <td>
-        <a href="">Edit</a> ||
-        <a href="">Delete</a>
-        </td>
-    </tr>
+  
   </table>
 </section>
 
