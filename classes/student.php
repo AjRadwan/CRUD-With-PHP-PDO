@@ -40,6 +40,7 @@ class Student{
         return $stmt->execute();
     }
 
+
     public function readById($id){
         $sql = "SELECT * FROM $this->table WHERE id = :id";
         $stmt = DB::prepare($sql);
@@ -53,6 +54,13 @@ class Student{
       $stmt = DB::prepare($sql); 
       $stmt->execute();
       return $stmt->fetchAll();
+    }
+
+    public function delete($id){
+      $sql = "DELETE FROM $this->table  WHERE id = :id";
+      $stmt = DB::prepare($sql);
+      $stmt->bindParam(':id', $id);
+      return $stmt->execute();
     }
 }
 

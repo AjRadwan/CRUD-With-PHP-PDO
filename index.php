@@ -27,7 +27,7 @@ if (isset($_POST['submit']) == "POST") {
 
 
 //Edit Data
-if (isset($_POST['edit']) == "POST") {
+if (isset($_POST['update']) == "POST") {
   $id = $_POST['id'];
   $name = $_POST['name'];
   $dep = $_POST['dep'];
@@ -42,13 +42,23 @@ if (isset($_POST['edit']) == "POST") {
     }
 }
 ?>
+<?php
+//Delete Post
+if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+   $id = (int)$_GET['id'];
+   if ($user->delete($id)) {
+    echo "<strong class='delete'>Data Inserted Successfully!!</strong>";
+   }   }
+?>
 
 <?php
 //upadte data query
-if ($_GET['action'] && $_GET['action'] == 'edit') {
+if (isset($_GET['action']) && $_GET['action'] == 'edit') {
    $id = (int)$_GET['id'];
    $result = $user->readById($id);
 ?>
+
+
 <form action="" method="post">
 <input type="hidden" name="id" value="<?php echo $result['id']; ?>"/>
  <table>
@@ -128,7 +138,8 @@ if ($_GET['action'] && $_GET['action'] == 'edit') {
         <td>
     <?php echo "<a href='index.php?action=edit&id=".$value['id']."'>Edit</a>";?>
         ||
-        <a href="">Delete</a>
+    <?php echo "<a href='index.php?action=delete&id=".$value['id']."'>Delete</a>";?>
+
         </td>
     </tr>
 <?php }?>
